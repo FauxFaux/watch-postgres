@@ -1,0 +1,11 @@
+servers:
+  - name: localhost
+    connect:
+      url: postgres://postgres@localhost
+    queries:
+      - name: activity
+        sql: select * from pg_stat_activity;
+        frequency: PT5s
+      - name: replication
+        sql: select * from pg_stat_replication;
+        frequency: PT5s

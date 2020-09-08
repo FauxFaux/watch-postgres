@@ -1,0 +1,31 @@
+[package]
+name = "watch-postgres"
+version = "0.1.0"
+authors = ["Chris West (Faux) <git@goeswhere.com>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "1"
+ctrlc = "3"
+gcd = "2"
+native-tls = "0.2"
+parse_duration = "2"
+postgres-native-tls = "0.3"
+serde_yaml = "0.8"
+zstd = "0.5"
+
+[dependencies.chrono]
+version = "0.4"
+features = ["serde"]
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]
+
+[dependencies.serde_json]
+version = "1"
+features = ["preserve_order"]
+
+[dependencies.postgres]
+version = "0.17"
+features = ["with-chrono-0_4", "with-serde_json-1"]
