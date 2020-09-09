@@ -1,11 +1,40 @@
 servers:
   - name: localhost
     connect:
-      url: postgres://postgres@localhost
+      url: postgres://postgres@localhost/tiny
     queries:
       - name: activity
-        sql: select * from pg_stat_activity;
+        sql: select * from pg_stat_activity order by backend_start;
         frequency: PT5s
       - name: replication
-        sql: select * from pg_stat_replication;
+        sql: select * from pg_stat_replication order by backend_start;
+        frequency: PT5s
+      - name: wal_receiver
+        sql: select * from pg_stat_wal_receiver order by pid;
+        frequency: PT5s
+      - name: subscription
+        sql: select * from pg_stat_subscription order by pid;
+        frequency: PT5s
+      - name: ssl
+        sql: select * from pg_stat_ssl order by pid;
+        frequency: PT5s
+      - name: archiver
+        # one row
+        sql: select * from pg_stat_archiver;
+        frequency: PT5s
+      - name: bgwriter
+        # one row
+        sql: select * from pg_stat_bgwriter;
+        frequency: PT5s
+      - name: database
+        sql: select * from pg_stat_database order by datid;
+        frequency: PT5s
+      - name: all_tables
+        sql: select * from pg_stat_all_tables order by relid;
+        frequency: PT5s
+      - name: all_indexes
+        sql: select * from pg_stat_all_indexes order by indexrelid;
+        frequency: PT5s
+      - name: io_all_tables
+        sql: select * from pg_statio_all_tables;
         frequency: PT5s
